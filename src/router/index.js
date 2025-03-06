@@ -15,20 +15,20 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  auth.onAuthStateChanged((user) => {
-    if (to.meta.requiresAuth && !user) {
-      next("/login");
-    } else if (to.meta.requiresGuest && user) {
-      next("/");
-    } else {
-      next();
-    }
-  });
+router.beforeEach(async (to, from, next) => {
+  const user = auth.currentUser;
+
+  if (to.meta.requiresAuth && !user) {
+    next("/login");
+  } else if (to.meta.requiresGuest && user) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;
