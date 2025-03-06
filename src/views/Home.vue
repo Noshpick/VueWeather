@@ -2,7 +2,7 @@
 <div class="wrapper">
     <p>Узнать погоду в {{ city == '' ? 'Вашем городе' : city }}</p>
     <div class="info">
-    <input type="text" v-model="city" placeholder="Укажите город">
+    <input type="text" v-model="city" placeholder="Укажите город" @keyup.enter="getWeather()">
     <button v-if="city != ''" @click="getWeather()">Узнать погоду</button>
     <button disabled v-else>Укажите название города</button>
     </div>
@@ -16,7 +16,7 @@ import axios from 'axios';
 
 import WeatherInfo from '../components/WeatherInfo.vue';
 
-const apiKey = import.meta.env.VITE_API_KEY; // В .env указывайте свой API ключ с сайта https://openweathermap.org/
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export default {
 
@@ -87,6 +87,7 @@ export default {
   cursor: pointer;
   padding: 10px 15px;
   margin-left: 20px;
+  border: none;
 }
 
 @media screen and (max-width: 479px) {

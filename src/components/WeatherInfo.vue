@@ -22,5 +22,10 @@
     flex-direction: column;
     justify-content: flex-start;
   }
+
+  .info p{
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
   </style>
   
